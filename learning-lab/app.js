@@ -327,7 +327,7 @@ function configureEvents() {
   $('generate-course').onclick = generatePath;
   $('activate-course').onclick = async () => { if (!state.draftCourse || state.busy) return; const course = state.draftCourse; $('import-dialog').close(); await activateCourse(course); try { await refreshLibrary(); } catch (e) { toast(e.message); } };
   $('forget-material').onclick = forgetMaterial;
-  $('course-select').onchange = async () => { if (state.busy) return; const id = $('course-select').value; setBusy(true); try { const data = courses.get(id); if (!data) throw new Error('课程已移除。'); await activateCourse(data); } catch (e) { error(e.message); $('course-select').value = state.course.id; } finally { setBusy(false); } }; 
+  $('course-select').onchange = async () => { if (state.busy) return; const id = $('course-select').value; setBusy(true); try { const data = courses.get(id); if (!data) throw new Error('课程已移除。'); await activateCourse(data); } catch (e) { error(e.message); $('course-select').value = state.course.id; } finally { setBusy(false); } };
   document.querySelectorAll('[data-task]').forEach(n => n.onclick = () => switchTask(n.dataset.task));
   $('answer-form').onsubmit = e => { e.preventDefault(); submit(false); }; $('ai-check').onclick = () => submit(true); $('sample').onclick = loadSample;
   $('settings-open').onclick = openSettings; $('settings-close').onclick = () => $('settings').close();
